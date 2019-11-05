@@ -12,7 +12,6 @@ public class ConvenientFacilitiesServiceImpl implements ConvenientFacilitiesServ
 	
 	@Override
 	public List<Vector<Object>> getSelectAll() throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
