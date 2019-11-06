@@ -39,7 +39,6 @@ public class UserListDaoImpl implements UserListDAO {
 	public int userListUpdate(UserListDTO userListDTO) throws SQLException {
 		return 0;
 	}
-
 	@Override
 	public int userListDelete(String id) throws SQLException {
 		return 0;
