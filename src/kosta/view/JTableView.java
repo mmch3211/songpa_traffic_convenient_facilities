@@ -61,7 +61,7 @@ public class JTableView  extends JFrame implements ActionListener{
 	JButton search = new JButton("검색");
 	JButton using = new JButton("이용가능");
 	JButton defaultValue = new JButton("초기화면");
-	
+	JButton bookmarkBtn = new JButton("즐겨찾기 추가");
 /**
 	화면구성 및 이벤트등록
 
@@ -87,6 +87,7 @@ public class JTableView  extends JFrame implements ActionListener{
 		//South영역
 		
 		p.setBackground(Color.GREEN);
+		p.add(bookmarkBtn);
 		p.add(combo);
 		p.add(jtf);
 		p.add(search);
@@ -124,7 +125,7 @@ public class JTableView  extends JFrame implements ActionListener{
 		login.addActionListener(this);
 		logout.addActionListener(this);
 		insert.addActionListener(this);
-		
+		bookmarkBtn.addActionListener(this);
 		quit.addActionListener(new ActionListener() {
 			
 			@Override
@@ -210,6 +211,8 @@ public class JTableView  extends JFrame implements ActionListener{
 			System.out.println("로그인");
 		}else if(target == logout) {//로그아웃
 			System.out.println("로그아웃");
+		}else if(target == bookmarkBtn) { //즐겨찾기추가
+			System.out.println("즐겨찾기 추가");
 		}
 		
 		else {//이용가능
