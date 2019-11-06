@@ -87,5 +87,16 @@ public class ConvenientFacilitiesController {
 		return result;
 	}
 	
+	public static UserListDTO getLogin(String id, String pw) {
+		UserListDTO dto =null;
+		try {
+			dto = userService.getLogin(id, pw);
+		}catch(Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}return dto;
+	}
+	
+	
 /////////////³¡	
 }

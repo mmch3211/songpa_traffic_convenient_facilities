@@ -22,5 +22,14 @@ public class UserListServiceImpl implements UserListService {
 		}
 		return result;
 	}
+
+	@Override
+	public UserListDTO getLogin(String id, String pw) throws SQLException {
+		UserListDTO result = dao.getLogin(id, pw);
+		if(result==null) {
+			throw new SQLException("로그인되지 않았습니다.");
+		}
+		return result;
+	}
 	
 }

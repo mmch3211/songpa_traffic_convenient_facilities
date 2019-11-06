@@ -22,4 +22,8 @@ public interface UserListService {
 //	 * */
 //	int userListUpdate(UserListDTO userListDTO)throws SQLException;
 //	
+	
+	UserListDTO getLogin(String id, String pw) throws SQLException;
+	
+	
 }

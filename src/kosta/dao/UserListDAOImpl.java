@@ -72,5 +72,44 @@ public class UserListDAOImpl implements UserListDAO {
 //	}
 //	
 
+	@Override
+	public UserListDTO getLogin(String id, String pw) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps = null;
+		ResultSet rs=null;
+		String sql = "select * from userlist where upper(id) = upper (?) and pw = ?";
+		 UserListDTO dto =null;
+		try {
+			 con=DbUtil.getConnection();
+			 ps=con.prepareStatement(sql);
+			 ps.setString(1, id);
+			 ps.setString(2, pw);
+			 rs = ps.executeQuery();
+			 while(rs.next()) {
+				 dto = new UserListDTO(
+				  rs.getString("id"),
+				  rs.getString("pw"),
+				  rs.getString("name"),	
+				  rs.getString("addr"));
+			 }
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return dto;
+	}
+	
+
+	@Override
+	public int favoriteUpdate() throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int favoriteDelete() throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }
