@@ -119,7 +119,6 @@ public class JDialogView extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String label = e.getActionCommand();
 		if(label.equals("회원가입")) {
-			System.out.println("회원가입");
 			//유효성 체크 (id, name, age, addr) 
 			if(isValidate(id,password,name,addr)) {
 				if(idCheckState) {
