@@ -124,8 +124,8 @@ public class ConvenientFacilitiesDAOImpl implements ConvenientFacilitiesDAO {
 						v.add(rs.getInt("PK_FEE"));
 						v.add(rs.getString("PK_CONTACT"));
 						list.add(v);
-						break;
-					}
+					}break;
+					
 				case "技瞒厘" :
 					con=DbUtil.getConnection();
 					ps=con.prepareStatement("SELECT * FROM VIEW_WS WHERE WS_ADDR1 LIKE ?");
@@ -140,8 +140,8 @@ public class ConvenientFacilitiesDAOImpl implements ConvenientFacilitiesDAO {
 						v.add(rs.getString("WS_CONTACT"));
 						v.add(rs.getString("WS_DATE"));
 						list.add(v);
-						break;
-					}
+					}break;
+					
 				case"面傈家":
 					con=DbUtil.getConnection();
 					ps=con.prepareStatement("SELECT * FROM VIEW_ELC WHERE ELC_ADDR1 LIKE ?");
@@ -157,8 +157,8 @@ public class ConvenientFacilitiesDAOImpl implements ConvenientFacilitiesDAO {
 						v.add(rs.getString("ELC_PARKINGFEE"));
 						v.add(rs.getString("ELC_ADDR1"));
 						list.add(v);
-						break;
-					}
+					}break;
+					
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
@@ -189,8 +189,7 @@ public class ConvenientFacilitiesDAOImpl implements ConvenientFacilitiesDAO {
 						v.add(rs.getInt("PK_FEE"));
 						v.add(rs.getString("PK_CONTACT"));
 						list.add(v);
-						break;
-					}
+					}break;
 
 				case"面傈家":
 					con=DbUtil.getConnection();
@@ -206,8 +205,7 @@ public class ConvenientFacilitiesDAOImpl implements ConvenientFacilitiesDAO {
 						v.add(rs.getString("ELC_PARKINGFEE"));
 						v.add(rs.getString("ELC_ADDR1"));
 						list.add(v);
-						break;
-					}
+					}break;
 			}
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
