@@ -167,7 +167,7 @@ public class JDialogView extends JDialog implements ActionListener{
 		
 		for(JTextField t : text) {
 			if(t.getText().equals("")) {
-				FailView.errorMessage("값을 입력하세요");
+				FailView.errorMessage("빈칸을 입력하세요");
 				t.requestFocus();
 				return false;
 			}
