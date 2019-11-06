@@ -20,9 +20,15 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import kosta.controller.ConvenientFacilitiesController;
+import kosta.dto.UserListDTO;
 
 
 public class JTableView  extends JFrame implements ActionListener{
+	
+	UserListDTO dto;
+
+	
+	
 	JMenu m = new JMenu("목록");
 	JMenu m2 = new JMenu("유저");
 	JMenuItem login = new JMenuItem("로그인");
@@ -208,11 +214,15 @@ public class JTableView  extends JFrame implements ActionListener{
 		}else if(target == insert) {//회원가입
 			new JDialogView(this, "회원가입");
 		}else if(target == login) {//로그인
-			System.out.println("로그인");
+			new LoginJDialogView(this, "로그인");
+
 		}else if(target == logout) {//로그아웃
 			System.out.println("로그아웃");
+			dto = null;
+			SuccessView.successMessage("로그아웃 되었습니다.");
 		}else if(target == bookmarkBtn) { //즐겨찾기추가
 			System.out.println("즐겨찾기 추가");
+
 		}
 		
 		else {//이용가능
@@ -231,7 +241,13 @@ public class JTableView  extends JFrame implements ActionListener{
 			
 		}
 
+	
 //		
 	}
+	public void setDTO(UserListDTO dto) {
+		this.dto = dto;
+	}
+	
+	
 
 }
