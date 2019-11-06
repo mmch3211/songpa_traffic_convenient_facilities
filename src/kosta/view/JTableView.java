@@ -204,7 +204,7 @@ public class JTableView  extends JFrame implements ActionListener{
 				this.addRowTable(list);
 			}else if(jt.getColumnName(0).equals("사업장명")) {
 //				System.out.println("세차장");
-				FailView.errorMessage("?");
+				FailView.errorMessage("이용시간에 대한 데이터 준비중입니다.");
 			}else  {
 //				System.out.println("충전소");
 				category = "충전소";
