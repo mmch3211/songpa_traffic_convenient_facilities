@@ -7,11 +7,13 @@ import java.util.Vector;
 import kosta.dto.UserListDTO;
 import kosta.service.ConvenientFacilitiesService;
 import kosta.service.ConvenientFacilitiesServiceImpl;
+import kosta.service.UserListService;
+import kosta.service.UserListServiceImpl;
 import kosta.view.FailView;
 
 public class ConvenientFacilitiesController {
 	private static ConvenientFacilitiesService service = new ConvenientFacilitiesServiceImpl();
-
+	private static UserListService userService = new UserListServiceImpl();
 	
 	public static List<Vector<Object>> getSelectELC(){
 		List<Vector<Object>>list=null;
@@ -67,7 +69,7 @@ public class ConvenientFacilitiesController {
 	public static int userListInsert(UserListDTO userListDTO) {
 		int result=0;
 		try {
-			result = service.userListInsert(userListDTO);
+			result = userService.userListInsert(userListDTO);
 		}catch(Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -77,7 +79,7 @@ public class ConvenientFacilitiesController {
 	public static boolean getCheckById(String id) {
 		boolean result = true;
 		try {
-			 result = service.getCheckById(id);
+			 result = userService.getCheckById(id);
 		}catch(SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
