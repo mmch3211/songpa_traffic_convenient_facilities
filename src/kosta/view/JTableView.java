@@ -68,12 +68,13 @@ public class JTableView  extends JFrame implements ActionListener{
 	JButton using = new JButton("이용가능");
 	JButton defaultValue = new JButton("초기화면");
 	JButton bookmarkBtn = new JButton("즐겨찾기 추가");
+	JButton delete = new JButton("즐겨찾기 삭제");
 /**
 	화면구성 및 이벤트등록
 
 */
 	public JTableView(){
-		super("DB연동");
+		super("교통편의시설검색 ver.송파");
 		
 		m.add(parking);
 		m.add(carwash);
@@ -94,6 +95,7 @@ public class JTableView  extends JFrame implements ActionListener{
 		
 		p.setBackground(Color.GREEN);
 		p.add(bookmarkBtn);
+		p.add(delete);
 		p.add(combo);
 		p.add(jtf);
 		p.add(search);
@@ -105,7 +107,7 @@ public class JTableView  extends JFrame implements ActionListener{
 
 		//DB에 데이터 가져와서 화면에 반영
 		//controller -> service -> dao
-		
+
 
 		dt.setColumnIdentifiers(nameParking);
 		List<Vector<Object>> list = ConvenientFacilitiesController.getSelectPK();
@@ -116,7 +118,7 @@ public class JTableView  extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setVisible(true);
 
-	
+		
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -132,6 +134,7 @@ public class JTableView  extends JFrame implements ActionListener{
 		logout.addActionListener(this);
 		insert.addActionListener(this);
 		bookmarkBtn.addActionListener(this);
+		delete.addActionListener(this);
 		quit.addActionListener(new ActionListener() {
 			
 			@Override
@@ -224,7 +227,6 @@ public class JTableView  extends JFrame implements ActionListener{
 			List<Vector<Object>> list = ConvenientFacilitiesController.getSelectPK();
 			this.addRowTable(list);
 		}else if(target == bookmark) {//즐겨찾기
-			System.out.println("즐겨찾기");
 			//dto.getid로 id보내고 온 값들 리스트로 받아서 싸아아악 뿌린다.
 			if(dto == null) {
 				FailView.errorMessage("로그인 후 사용해주세요.");
@@ -244,10 +246,12 @@ public class JTableView  extends JFrame implements ActionListener{
 			dto = null;
 			SuccessView.successMessage("로그아웃 되었습니다.");
 		}else if(target == bookmarkBtn) { //즐겨찾기추가
-			System.out.println("즐겨찾기 추가");
+//			System.out.println("즐겨찾기 추가");
 			int row =0;
 			String name = null;
 			String addr = null;
+			
+			
 			
 			if(dto == null) {
 				FailView.errorMessage("로그인 후 사용해주세요.");
@@ -274,6 +278,26 @@ public class JTableView  extends JFrame implements ActionListener{
 				SuccessView.successMessage("즐겨찾기 추가!");
 			}
 
+		}else if(target == delete) {
+			int row =0;
+			String id = null;
+			String name = null;
+			String addr = null;
+			
+			row = jt.getSelectedRow();
+			id = jt.getValueAt(row, 0).toString();
+			name = jt.getValueAt(row, 1).toString();
+			addr = jt.getValueAt(row, 2).toString();
+			if(ConvenientFacilitiesController.favoriteDelete(id, name, addr) > 0) {
+				SuccessView.successMessage("삭제되었습니다.");
+				List<Vector<Object>> list = ConvenientFacilitiesController.getFavoriteList(dto.getId());
+				this.addRowTable(list);
+			}else {
+				FailView.errorMessage("삭제되지 않았습니다.");
+			}
+			
+			
+			
 		}
 		
 		else {//이용가능

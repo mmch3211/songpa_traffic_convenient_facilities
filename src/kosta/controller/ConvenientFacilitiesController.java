@@ -109,7 +109,13 @@ public class ConvenientFacilitiesController {
 	}
 
 	public static int favoriteDelete(String id, String ComName, String ComAddr) {
-		return 0;
+		int result=0;
+		try {
+			result = userService.favoriteDelete(id, ComName, ComAddr);
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return result;
 	}
 
 	public static List<Vector<Object>> getFavoriteList(String id) {
