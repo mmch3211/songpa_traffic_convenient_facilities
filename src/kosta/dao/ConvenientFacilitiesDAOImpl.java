@@ -142,7 +142,7 @@ public class ConvenientFacilitiesDAOImpl implements ConvenientFacilitiesDAO {
 						list.add(v);
 						break;
 					}
-				case"林蜡家":
+				case"面傈家":
 					con=DbUtil.getConnection();
 					ps=con.prepareStatement("SELECT * FROM VIEW_ELC WHERE ELC_ADDR1 LIKE ?");
 					ps.setString(1, "%"+addr+"%");
@@ -192,7 +192,7 @@ public class ConvenientFacilitiesDAOImpl implements ConvenientFacilitiesDAO {
 						break;
 					}
 
-				case"林蜡家":
+				case"面傈家":
 					con=DbUtil.getConnection();
 					ps=con.prepareStatement("SELECT * FROM VIEW_NOW_ELC");
 					rs=ps.executeQuery();
