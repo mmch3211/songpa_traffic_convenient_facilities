@@ -5,12 +5,6 @@ import java.util.List;
 import java.util.Vector;
 
 public interface ConvenientFacilitiesService {
-	
-	/**
-	 * 전체레코드 검색
-	 * */
-	List<Vector<Object>> getSelectAll() throws SQLException;
-	
 	/**
 	 * 카테고리에서 주차장선택 
 	 * */
@@ -34,11 +28,6 @@ public interface ConvenientFacilitiesService {
 	/**
 	 * 선택영역에 해당한 매장이 지금 시간에 이용가능한지 여부
 	 * */
-	List<Vector<Object>> getSelectByUsingNow() throws SQLException;
-	
-	/**
-	 * 현재시간에 이용가능한 모든 매장 검색
-	 * */
-	List<Vector<Object>> getSelectByCategoryNow() throws SQLException;
+	List<Vector<Object>> getSelectByUsingNow(String category) throws SQLException;
 	
 }

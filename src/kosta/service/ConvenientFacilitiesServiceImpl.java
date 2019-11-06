@@ -10,14 +10,6 @@ import kosta.dao.ConvenientFacilitiesDAOImpl;
 public class ConvenientFacilitiesServiceImpl implements ConvenientFacilitiesService {
 	ConvenientFacilitiesDAO dao = new ConvenientFacilitiesDAOImpl();
 	
-	@Override
-	public List<Vector<Object>> getSelectAll() throws SQLException {
-		List<Vector<Object>>list = dao.getSelectAll();
-		if(list==null||list.isEmpty()) {
-			throw new SQLException("검색된 정보가 없습니다.");
-		}
-		return list;
-	}
 
 	@Override
 	public List<Vector<Object>> getSelectPK() throws SQLException {
@@ -56,21 +48,13 @@ public class ConvenientFacilitiesServiceImpl implements ConvenientFacilitiesServ
 	}
 
 	@Override
-	public List<Vector<Object>> getSelectByUsingNow() throws SQLException {
-		List<Vector<Object>>list = dao.getSelectByUsingNow();
+	public List<Vector<Object>> getSelectByUsingNow(String category) throws SQLException {
+		List<Vector<Object>>list = dao.getSelectByUsingNow(category);
 		if(list==null||list.isEmpty()) {
 			throw new SQLException("검색된 정보가 없습니다.");
 		}
 		return list;
 	}
 
-	@Override
-	public List<Vector<Object>> getSelectByCategoryNow() throws SQLException {
-		List<Vector<Object>>list = dao.getSelectByCategoryNow();
-		if(list==null||list.isEmpty()) {
-			throw new SQLException("검색된 정보가 없습니다.");
-		}
-		return list;
-	}
 
 }

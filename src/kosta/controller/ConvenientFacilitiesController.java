@@ -1,5 +1,6 @@
 package kosta.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -10,19 +11,6 @@ import kosta.view.FailView;
 public class ConvenientFacilitiesController {
 	private static ConvenientFacilitiesService service = new ConvenientFacilitiesServiceImpl();
 
-	/**
-	 * 전체레코드 호출
-	 * */
-	public static List<Vector<Object>> getSelectAll(){
-		List<Vector<Object>>list=null;
-		try {
-			list=service.getSelectAll();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			FailView.errorMessage(e.getMessage());
-		}return list;
-	}
 	
 	public static List<Vector<Object>> getSelectELC(){
 		List<Vector<Object>>list=null;
@@ -54,20 +42,21 @@ public class ConvenientFacilitiesController {
 		}return list;
 	}
 	
-	public static List<Vector<Object>> getSelectByCategoryNow(){
+	
+	public static List<Vector<Object>> getSelectByUsingNow(String category){
 		List<Vector<Object>>list=null;
 		try {
-		list = service.getSelectByCategoryNow();
+			list = service.getSelectByUsingNow(category);
 		}catch(Exception e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}return list;
 	}
 	
-	public static List<Vector<Object>> getSelectByUsingNow(){
-		List<Vector<Object>>list=null;
+	public List<Vector<Object>> getSearchByAddr1(String category, String addr) throws SQLException {
+		List<Vector<Object>>list =null;
 		try {
-		list = service.getSelectByUsingNow();
+		service.getSearchByAddr1(category,addr);
 		}catch(Exception e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
