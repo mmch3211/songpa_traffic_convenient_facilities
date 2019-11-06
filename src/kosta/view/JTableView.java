@@ -164,7 +164,7 @@ public class JTableView  extends JFrame implements ActionListener{
 			System.out.println("search call");
 			String keyField = combo.getSelectedItem().toString().trim();
 			String keyWord = jtf.getText().trim();
-			System.out.println(keyField +" | "+keyWord);
+
 
 			if(keyWord.equals("")) {
 				FailView.errorMessage("검색단어를 입력해주세요");
@@ -172,12 +172,21 @@ public class JTableView  extends JFrame implements ActionListener{
 				return;
 			}
 			
+			
+			
 			if(jt.getColumnName(0).equals("주차장이름")){
-				System.out.println(1);
+//				System.out.println(1);
+				String category = "주차장";
+				List<Vector<Object>> list = ConvenientFacilitiesController.getSearchByAddr1(category, keyWord);
+				this.addRowTable(list);
 			}else if(jt.getColumnName(0).equals("사업장명")) {
-				System.out.println(2);
+				String category = "세차장";
+				List<Vector<Object>> list = ConvenientFacilitiesController.getSearchByAddr1(category, keyWord);
+				this.addRowTable(list);
 			}else  {
-				System.out.println(3);
+				String category = "충전소";
+				List<Vector<Object>> list = ConvenientFacilitiesController.getSearchByAddr1(category, keyWord);
+				this.addRowTable(list);
 			}
 		}else if(target == defaultValue) {
 			dt.setColumnIdentifiers(nameParking);
@@ -186,7 +195,7 @@ public class JTableView  extends JFrame implements ActionListener{
 		}
 
 		else {
-			System.out.println("이용 버튼");
+//			System.out.println("이용 버튼");
 			String category = null;
 			if(jt.getColumnName(0).equals("주차장이름")){
 //				System.out.println("주차장");

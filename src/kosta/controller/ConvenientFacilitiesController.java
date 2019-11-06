@@ -53,7 +53,7 @@ public class ConvenientFacilitiesController {
 		}return list;
 	}
 	
-	public List<Vector<Object>> getSearchByAddr1(String category, String addr) throws SQLException {
+	public static List<Vector<Object>> getSearchByAddr1(String category, String addr) {
 		List<Vector<Object>>list =null;
 		try {
 		service.getSearchByAddr1(category,addr);
