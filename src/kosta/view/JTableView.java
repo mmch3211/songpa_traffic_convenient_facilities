@@ -49,12 +49,13 @@ public class JTableView  extends JFrame implements ActionListener{
 		South 영역에 추가할 Componet들
 	*/
 	JPanel p= new JPanel();
-	String [] comboName={"  ALL  "," 도로명 "};//검색항목
+	String [] comboName={" 도로명 "};//검색항목
 	
 	JComboBox combo = new JComboBox(comboName);
 	JTextField jtf = new JTextField(20);
 	JButton search = new JButton("검색");
-	JButton using = new JButton("이용");
+	JButton using = new JButton("이용가능");
+	JButton defaultValue = new JButton("초기화면");
 	
 /**
 	화면구성 및 이벤트등록
@@ -80,20 +81,17 @@ public class JTableView  extends JFrame implements ActionListener{
 		p.add(jtf);
 		p.add(search);
 		p.add(using);
+		p.add(defaultValue);
+		
 		add(jsp, "Center");
 		add(p, "South");
 
 		//DB에 데이터 가져와서 화면에 반영
 		//controller -> service -> dao
-		List<Vector<Object>> list = ConvenientFacilitiesController.getSelectWS();
-		this.addRowTable(list);
 		
-		dt.setColumnIdentifiers(nameCharging);
-		list = ConvenientFacilitiesController.getSelectELC();
-		this.addRowTable(list);
-		
+
 		dt.setColumnIdentifiers(nameParking);
-		list = ConvenientFacilitiesController.getSelectPK();
+		List<Vector<Object>> list = ConvenientFacilitiesController.getSelectPK();
 		this.addRowTable(list);
 		
 		
@@ -110,7 +108,7 @@ public class JTableView  extends JFrame implements ActionListener{
 		carwash.addActionListener(this);
 		charging.addActionListener(this);
 		search.addActionListener(this);
-
+		defaultValue.addActionListener(this);
 		using.addActionListener(this);
 		
 		quit.addActionListener(new ActionListener() {
@@ -148,26 +146,63 @@ public class JTableView  extends JFrame implements ActionListener{
 		
 	public void actionPerformed(ActionEvent e) {
 		Object target = e.getSource(); //이벤트를 발생시키는 주체
-		List<Vector<Object>> list = null;
-		if(target == parking) {//삽입
+		 
+		if(target == parking) {
 			dt.setColumnIdentifiers(nameParking);
-			list = ConvenientFacilitiesController.getSelectPK();
+			List<Vector<Object>> list = ConvenientFacilitiesController.getSelectPK();
 			this.addRowTable(list);
 		}else if(target == carwash){
 			dt.setColumnIdentifiers(nameCarwash);
-			list = ConvenientFacilitiesController.getSelectWS();
+			List<Vector<Object>> list = ConvenientFacilitiesController.getSelectWS();
 			this.addRowTable(list);
 		}else if(target == charging) {
 			dt.setColumnIdentifiers(nameCharging);
-			list = ConvenientFacilitiesController.getSelectELC();
+			List<Vector<Object>> list = ConvenientFacilitiesController.getSelectELC();
 			this.addRowTable(list);
 			
 		}else if (target == search) {
 			System.out.println("search call");
-//			ConvenientFacilitiesController.get
+			String keyField = combo.getSelectedItem().toString().trim();
+			String keyWord = jtf.getText().trim();
+			System.out.println(keyField +" | "+keyWord);
+
+			if(keyWord.equals("")) {
+				FailView.errorMessage("검색단어를 입력해주세요");
+				jtf.requestFocus();
+				return;
+			}
+			
+			if(jt.getColumnName(0).equals("주차장이름")){
+				System.out.println(1);
+			}else if(jt.getColumnName(0).equals("사업장명")) {
+				System.out.println(2);
+			}else  {
+				System.out.println(3);
+			}
+		}else if(target == defaultValue) {
+			dt.setColumnIdentifiers(nameParking);
+			List<Vector<Object>> list = ConvenientFacilitiesController.getSelectPK();
+			this.addRowTable(list);
 		}
+
 		else {
 			System.out.println("이용 버튼");
+			String category = null;
+			if(jt.getColumnName(0).equals("주차장이름")){
+//				System.out.println("주차장");
+				category = "주차장";
+				List<Vector<Object>> list = ConvenientFacilitiesController.getSelectByUsingNow(category);
+				this.addRowTable(list);
+			}else if(jt.getColumnName(0).equals("사업장명")) {
+//				System.out.println("세차장");
+				FailView.errorMessage("?");
+			}else  {
+//				System.out.println("충전소");
+				category = "충전소";
+				List<Vector<Object>> list = ConvenientFacilitiesController.getSelectByUsingNow(category);
+				this.addRowTable(list);
+			}
+			
 		}
 ////			System.out.println("insert call");
 //			new JDialogView(this, "가입");
