@@ -1,9 +1,9 @@
 package kosta.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+import kosta.dto.UserListDTO;
 import kosta.service.ConvenientFacilitiesService;
 import kosta.service.ConvenientFacilitiesServiceImpl;
 import kosta.view.FailView;
@@ -63,5 +63,15 @@ public class ConvenientFacilitiesController {
 		}return list;
 	}
 
+	public static int userListInsert(UserListDTO userListDTO) {
+		int result=0;
+		try {
+			result = service.userListInsert(userListDTO);
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return result;
+	}
+	
 /////////////³¡	
 }
