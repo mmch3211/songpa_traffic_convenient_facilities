@@ -1,1 +1,3 @@
-select * from userlist
+select * from ELC
+
+show user

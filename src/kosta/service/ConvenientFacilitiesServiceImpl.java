@@ -12,43 +12,65 @@ public class ConvenientFacilitiesServiceImpl implements ConvenientFacilitiesServ
 	
 	@Override
 	public List<Vector<Object>> getSelectAll() throws SQLException {
-		return null;
+		List<Vector<Object>>list = dao.getSelectAll();
+		if(list==null||list.isEmpty()) {
+			throw new SQLException("검색된 정보가 없습니다.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<Vector<Object>> getSelectPK() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vector<Object>>list = dao.getSelectPK();
+		if(list==null||list.isEmpty()) {
+			throw new SQLException("검색된 정보가 없습니다.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<Vector<Object>> getSelectWS() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vector<Object>>list = dao.getSelectWS();
+		if(list==null||list.isEmpty()) {
+			throw new SQLException("검색된 정보가 없습니다.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<Vector<Object>> getSelectELC() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vector<Object>>list = dao.getSelectELC();
+		if(list==null||list.isEmpty()) {
+			throw new SQLException("검색된 정보가 없습니다.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<Vector<Object>> getSearchByAddr1(String category, String addr) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vector<Object>>list = dao.getSearchByAddr1(category,addr);
+		if(list==null||list.isEmpty()) {
+			throw new SQLException("검색된 정보가 없습니다.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<Vector<Object>> getSelectByUsingNow() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vector<Object>>list = dao.getSelectByUsingNow();
+		if(list==null||list.isEmpty()) {
+			throw new SQLException("검색된 정보가 없습니다.");
+		}
+		return list;
 	}
 
 	@Override
 	public List<Vector<Object>> getSelectByCategoryNow() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vector<Object>>list = dao.getSelectByCategoryNow();
+		if(list==null||list.isEmpty()) {
+			throw new SQLException("검색된 정보가 없습니다.");
+		}
+		return list;
 	}
 
 }
