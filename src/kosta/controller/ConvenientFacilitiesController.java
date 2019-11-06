@@ -1,5 +1,6 @@
 package kosta.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -68,6 +69,17 @@ public class ConvenientFacilitiesController {
 		try {
 			result = service.userListInsert(userListDTO);
 		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return result;
+	}
+	
+	public static boolean getCheckById(String id) {
+		boolean result = true;
+		try {
+			 result = service.getCheckById(id);
+		}catch(SQLException e) {
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		return result;

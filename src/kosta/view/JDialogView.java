@@ -143,16 +143,16 @@ public class JDialogView extends JDialog implements ActionListener{
 				return;
 			}
 //			controller -> service -> dao 갔다 결과 받는다.
-	//		if(UserListController.getCheckById(idValue)) {
-	//			FailView.errorMessage(idValue + "는 중복입니다.");
-	//			id.setText("");
-	//			id.requestFocus();
-	//			return;
-	//				
-	//		}else {
-	//			SuccessView.successMessage(idValue + "는 사용가능합니다.");
-	//			idCheckState = true;
-	//		}
+			if(ConvenientFacilitiesController.getCheckById(idValue)) {
+				FailView.errorMessage(idValue + "는 중복입니다.");
+				id.setText("");
+				id.requestFocus();
+				return;
+					
+			}else {
+				SuccessView.successMessage(idValue + "는 사용가능합니다.");
+				idCheckState = true;
+			}
 //			
 //		}
 		}else {
