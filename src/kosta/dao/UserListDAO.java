@@ -27,20 +27,25 @@ public interface UserListDAO {
 	 * */
 	UserListDTO getLogin(String id, String pw) throws SQLException;
 	
-	
 	/**
 	 * 즐찾업데이트
 	 * 	(수정하기)
 	 * ID와 카테고리, 해당업체명을 인수로 받음 
 	 * */
-	int favoriteUpdate()throws SQLException;
-	
+	int favoriteUpdate(String id, String ComName, String ComAddr)throws SQLException;
+
 	/**
 	 * 즐찾제거
 	 * Id와 카테고리, 해당업체명을 인수로 받음
 	 * */
 	
-	int favoriteDelete()throws SQLException;
+	int favoriteDelete(String id, String ConName, String ComAddr)throws SQLException;
+	
+	/**
+	 * 즐찾리스트 보여주기
+	 * */
+	List<Vector<Object>> getFavoriteList(String id) throws SQLException;
+	
 	
 	
 //	

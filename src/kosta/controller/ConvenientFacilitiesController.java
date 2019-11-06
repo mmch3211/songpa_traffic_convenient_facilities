@@ -97,6 +97,32 @@ public class ConvenientFacilitiesController {
 		}return dto;
 	}
 	
+
+	public static int favoriteUpdate(String id, String ComName, String ComAddr) {
+			int result=0;
+		try {
+			result = userService.favoriteUpdate(id, ComName, ComAddr);
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return result;
+	}
+
+	public static int favoriteDelete(String id, String ConName, String ComAddr) {
+		return 0;
+	}
+
+	public static List<Vector<Object>> getFavoriteList(String id) {
+		List<Vector<Object>>list=null;
+		try {
+			list = userService.getFavoriteList(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}return list;
+	}
+	
+	
 	
 /////////////³¡	
 }

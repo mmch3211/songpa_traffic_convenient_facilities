@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 import kosta.dto.UserListDTO;
 import kosta.util.DbUtil;
@@ -49,28 +52,6 @@ public class UserListDAOImpl implements UserListDAO {
 		 }
 		return result;
 	}
-//
-//	@Override
-//	public int userListUpdate(UserListDTO userListDTO) throws SQLException {
-//		Connection con = null;
-//		PreparedStatement ps =null;
-//		int result =0;
-//		String sql = "UPDATE USERLIST SET PW = ?, NAME =?, ADDR =? WHERE UPPER(ID) = UPPER(?)";
-//		 try {
-//			 con=DbUtil.getConnection();
-//			 ps=con.prepareStatement(sql);
-//			 ps.setString(1, userListDTO.getId());
-//			 ps.setString(2, userListDTO.getPw());
-//			 ps.setString(3, userListDTO.getName());
-//			 ps.setString(4, userListDTO.getAddr());
-//			 result=ps.executeUpdate();
-//			 
-//		 }finally {
-//			 DbUtil.dbClose(con, ps);
-//		 }
-//		return result;
-//	}
-//	
 
 	@Override
 	public UserListDTO getLogin(String id, String pw) throws SQLException {
@@ -97,19 +78,68 @@ public class UserListDAOImpl implements UserListDAO {
 		}
 		return dto;
 	}
+
+	@Override
+	public int favoriteUpdate(String id, String ComName, String ComAddr) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps =null;
+		int result =0;
+		String sql = "INSERT INTO FAVORITE VALUES (?,?,?)";
+		 try {
+			 con=DbUtil.getConnection();
+			 ps=con.prepareStatement(sql);
+			 ps.setString(1, id);
+			 ps.setString(2, ComName);
+			 ps.setString(3, ComAddr);
+			 result=ps.executeUpdate();
+		 }finally {
+			 DbUtil.dbClose(con, ps);
+		 }
+		return result;
+	}
 	
-
 	@Override
-	public int favoriteUpdate() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int favoriteDelete(String id, String ConName, String ComAddr) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps =null;
+		int result =0;
+		String sql = "INSERT INTO FAVORITE VALUES (?,?,?)";
+		 try {
+			 con=DbUtil.getConnection();
+			 ps=con.prepareStatement(sql);
+			 ps.setString(1, id);
+			 ps.setString(2, ConName);
+			 ps.setString(3, ComAddr);
+			 result=ps.executeUpdate();
+		 }finally {
+			 DbUtil.dbClose(con, ps);
+		 }
+		return result;
 	}
-
+	
 	@Override
-	public int favoriteDelete() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<Vector<Object>> getFavoriteList(String id) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps = null;
+		ResultSet rs=null;
+		List<Vector<Object>>list = new ArrayList<Vector<Object>>();
+		String sql = "SELECT * FROM FAVORITE WHERE ID = ?";
+		try {
+			con=DbUtil.getConnection();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				Vector<Object>v = new Vector<Object>();
+				v.add(rs.getString("ID"));
+				v.add(rs.getString("NAME"));
+				v.add(rs.getString("ADDR1"));
+				list.add(v);
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
 	}
-
-
+		
 }
