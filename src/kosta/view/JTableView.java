@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
+import javax.sound.midi.ControllerEventListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,27 +24,23 @@ import kosta.controller.ConvenientFacilitiesController;
 
 public class JTableView  extends JFrame implements ActionListener{
 	JMenu m = new JMenu("목록");
-	JMenuItem  insert=new JMenuItem("주차장");
-	JMenuItem  update=new JMenuItem("세차장");
-	JMenuItem  delete=new JMenuItem("충전소");
-	JMenuItem  use=new JMenuItem("이용가능");
+	JMenuItem  parking=new JMenuItem("주차장");
+	JMenuItem  carwash=new JMenuItem("세차장");
+	JMenuItem  charging=new JMenuItem("충전소");
+
 	JMenuItem  quit=new JMenuItem("종료");
 	JMenuBar mb=new JMenuBar();
 		
-	String [] name={"사업장명", "사업장업종명", "세차유형", "소재지도로명주소", "세차장전화번호", "데이터기준일"};
-	String [] name2 = {"충전소명", "충전소위치", "이용가능시작시간", "이용가능종료시각", "급속충전타입구분", "주차료부과", "소재지도로명주소"};
-	
-	DefaultTableModel dt= new DefaultTableModel(name,0) {
+	String [] nameCarwash={"사업장명", "사업장업종명", "세차유형", "소재지도로명주소", "세차장전화번호", "데이터기준일"};
+	String [] nameCharging = {"충전소명", "충전소위치", "이용가능시작시간", "이용가능종료시각", "급속충전타입구분", "주차료부과", "소재지도로명주소"};
+	String [] nameParking = {"주차장이름", "소재지도로명주소", "주차구획수", "운영시작시간", "운영종료시간", "주차기본시간", "주차기본요금", "주차장전화번호"};
+	DefaultTableModel dt= new DefaultTableModel(nameCarwash,0) {
 		public boolean isCellEditable(int row, int column) {
 			return false;
 		};
 	};
 	
-	DefaultTableModel dt2= new DefaultTableModel(name2,0) {
-		public boolean isCellEditable(int row, int column) {
-			return false;
-		};
-	};
+	
 	
 	JTable jt=new JTable(dt);
 	JScrollPane jsp=new JScrollPane(jt);
@@ -66,10 +63,10 @@ public class JTableView  extends JFrame implements ActionListener{
 	public JTableView(){
 		super("DB연동");
 		
-		m.add(insert);
-		m.add(update);
-		m.add(delete);
-		m.add(use);
+		m.add(parking);
+		m.add(carwash);
+		m.add(charging);
+
 		m.add(quit);
 		mb.add(m);
 
@@ -91,6 +88,14 @@ public class JTableView  extends JFrame implements ActionListener{
 		List<Vector<Object>> list = ConvenientFacilitiesController.getSelectWS();
 		this.addRowTable(list);
 		
+		dt.setColumnIdentifiers(nameCharging);
+		list = ConvenientFacilitiesController.getSelectELC();
+		this.addRowTable(list);
+		
+		dt.setColumnIdentifiers(nameParking);
+		list = ConvenientFacilitiesController.getSelectPK();
+		this.addRowTable(list);
+		
 		
 		setSize(800,600);
 		setLocationRelativeTo(null);
@@ -101,10 +106,12 @@ public class JTableView  extends JFrame implements ActionListener{
 		
 		
 //		이벤트등록
-		insert.addActionListener(this);
-		update.addActionListener(this);
-		delete.addActionListener(this);
+		parking.addActionListener(this);
+		carwash.addActionListener(this);
+		charging.addActionListener(this);
 		search.addActionListener(this);
+
+		using.addActionListener(this);
 		
 		quit.addActionListener(new ActionListener() {
 			
@@ -141,8 +148,27 @@ public class JTableView  extends JFrame implements ActionListener{
 		
 	public void actionPerformed(ActionEvent e) {
 		Object target = e.getSource(); //이벤트를 발생시키는 주체
-		
-//		if(target == insert) {//삽입
+		List<Vector<Object>> list = null;
+		if(target == parking) {//삽입
+			dt.setColumnIdentifiers(nameParking);
+			list = ConvenientFacilitiesController.getSelectPK();
+			this.addRowTable(list);
+		}else if(target == carwash){
+			dt.setColumnIdentifiers(nameCarwash);
+			list = ConvenientFacilitiesController.getSelectWS();
+			this.addRowTable(list);
+		}else if(target == charging) {
+			dt.setColumnIdentifiers(nameCharging);
+			list = ConvenientFacilitiesController.getSelectELC();
+			this.addRowTable(list);
+			
+		}else if (target == search) {
+			System.out.println("search call");
+//			ConvenientFacilitiesController.get
+		}
+		else {
+			System.out.println("이용 버튼");
+		}
 ////			System.out.println("insert call");
 //			new JDialogView(this, "가입");
 //		}else if(target == update) {//수정
