@@ -114,7 +114,7 @@ public class JTableView  extends JFrame implements ActionListener{
 		this.addRowTable(list);
 		
 		
-		setSize(800,600);
+		setSize(1000,800);
 		setLocationRelativeTo(null);
 		setVisible(true);
 
