@@ -29,6 +29,4 @@ public interface ConvenientFacilitiesService {
 	 * 선택영역에 해당한 매장이 지금 시간에 이용가능한지 여부
 	 * */
 	List<Vector<Object>> getSelectByUsingNow(String category) throws SQLException;
-	
-	
 }
