@@ -56,7 +56,7 @@ public class ConvenientFacilitiesController {
 	public static List<Vector<Object>> getSearchByAddr1(String category, String addr) {
 		List<Vector<Object>>list =null;
 		try {
-		service.getSearchByAddr1(category,addr);
+		list = service.getSearchByAddr1(category,addr);
 		}catch(Exception e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

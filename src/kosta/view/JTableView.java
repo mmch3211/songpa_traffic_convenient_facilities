@@ -162,7 +162,7 @@ public class JTableView  extends JFrame implements ActionListener{
 			
 		}else if (target == search) {
 			System.out.println("search call");
-			String keyField = combo.getSelectedItem().toString().trim();
+			
 			String keyWord = jtf.getText().trim();
 
 
@@ -213,53 +213,7 @@ public class JTableView  extends JFrame implements ActionListener{
 			}
 			
 		}
-////			System.out.println("insert call");
-//			new JDialogView(this, "가입");
-//		}else if(target == update) {//수정
-////			System.out.println("update call");
-//			new JDialogView(this, "수정");
-//		}else if(target == delete) {//삭제
-///*			int[] rows = jt.getSelectedRows();
-//			String[] ids = new String[rows.length];
-//			for(int i = 0; i < rows.length; i++) {
-//				ids[i] = jt.getValueAt(rows[i], 0).toString();
-//			}
-//			
-//			UserListController.userListDelete(ids);
-//			List<Vector<Object>> list = UserListController.getSelectAll();
-//			this.addRowTable(list);
-//	*/		
-//			int[] rows = jt.getSelectedRows();
-//			String[] ids = new String[rows.length];
-//			for(int i = 0; i < ids.length; i++) {
-//				String id = jt.getValueAt(rows[i], 0).toString();
-//				ids[i] = id;
-//			}
-//			int result = ConvenientFacilitiesController.userListDelete(ids);
-//			if(result == rows.length) {
-//				List<Vector<Object>> list = ConvenientFacilitiesController.getSelectAll();
-//				this.addRowTable(list);
-//			}
-//			
-//		}else {//검색
-//			//JComboBox 선택된 항목
-//			String keyField = combo.getSelectedItem().toString().trim();
-//			if(keyField.equals("ALL")) {
-//				List<Vector<Object>> list = ConvenientFacilitiesController.getSelectAll();
-//				this.addRowTable(list);
-//			}else {
-//				String keyWord = jtf.getText().trim();
-//				if(keyWord.equals("")) {
-//					FailView.errorMessage("검색단어를 입력해주세요");
-//					jtf.requestFocus();
-//					return;
-//				}
-//				
-//				List<Vector<Object>>list = ConvenientFacilitiesController.;
-//				if(list != null && list.size()>0) this.addRowTable(list);
-//			}
-//			
-//		}
+
 //		
 	}
 
