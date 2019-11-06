@@ -44,8 +44,8 @@ public class UserListServiceImpl implements UserListService {
 	}
 
 	@Override
-	public int favoriteDelete(String id, String ConName, String ComAddr) throws SQLException {
-		int result = dao.favoriteDelete(id, ConName, ComAddr);
+	public int favoriteDelete(String id, String ComName, String ComAddr) throws SQLException {
+		int result = dao.favoriteDelete(id, ComName, ComAddr);
 		if(result==0) {
 			throw new SQLException("즐겨찾기에 삭제되지 않았습니다.");
 		}

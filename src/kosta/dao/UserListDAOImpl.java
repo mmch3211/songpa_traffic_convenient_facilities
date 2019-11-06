@@ -99,16 +99,16 @@ public class UserListDAOImpl implements UserListDAO {
 	}
 	
 	@Override
-	public int favoriteDelete(String id, String ConName, String ComAddr) throws SQLException {
+	public int favoriteDelete(String id, String ComName, String ComAddr) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps =null;
 		int result =0;
-		String sql = "INSERT INTO FAVORITE VALUES (?,?,?)";
+		String sql = "DELETE FROM FAVORITE WHERE ID = ? AND NAME = ? AND ADDR1 = ?";
 		 try {
 			 con=DbUtil.getConnection();
 			 ps=con.prepareStatement(sql);
 			 ps.setString(1, id);
-			 ps.setString(2, ConName);
+			 ps.setString(2, ComName);
 			 ps.setString(3, ComAddr);
 			 result=ps.executeUpdate();
 		 }finally {

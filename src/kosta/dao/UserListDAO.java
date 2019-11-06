@@ -39,7 +39,7 @@ public interface UserListDAO {
 	 * Id와 카테고리, 해당업체명을 인수로 받음
 	 * */
 	
-	int favoriteDelete(String id, String ConName, String ComAddr)throws SQLException;
+	int favoriteDelete(String id, String ComName, String ComAddr)throws SQLException;
 	
 	/**
 	 * 즐찾리스트 보여주기

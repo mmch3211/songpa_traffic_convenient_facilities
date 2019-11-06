@@ -108,7 +108,7 @@ public class ConvenientFacilitiesController {
 		return result;
 	}
 
-	public static int favoriteDelete(String id, String ConName, String ComAddr) {
+	public static int favoriteDelete(String id, String ComName, String ComAddr) {
 		return 0;
 	}
 
