@@ -105,7 +105,7 @@ public class LoginJDialogView extends JDialog implements ActionListener{
 			System.out.println("로그인");
 			UserListDTO dto2 = ConvenientFacilitiesController.getLogin(id.getText(),password.getText());
 			if(dto2 == null) {
-				FailView.errorMessage("로그인 실패");
+//				FailView.errorMessage("로그인 실패");
 				id.requestFocus();
 				return;
 			}else {

@@ -44,7 +44,7 @@ public class JTableView  extends JFrame implements ActionListener{
 	String [] nameCarwash={"사업장명", "사업장업종명", "세차유형", "소재지도로명주소", "세차장전화번호", "데이터기준일"};
 	String [] nameCharging = {"충전소명", "충전소위치", "이용가능시작시간", "이용가능종료시각", "급속충전타입구분", "주차료부과", "소재지도로명주소"};
 	String [] nameParking = {"주차장이름", "소재지도로명주소", "주차구획수", "운영시작시간", "운영종료시간", "주차기본시간", "주차기본요금", "주차장전화번호"};
-	String[] nameBookmark = {};
+	String[] nameBookmark = {"ID","편의시설명", "소재지도로명주소"};
 	DefaultTableModel dt= new DefaultTableModel(nameCarwash,0) {
 		public boolean isCellEditable(int row, int column) {
 			return false;
@@ -158,7 +158,21 @@ public class JTableView  extends JFrame implements ActionListener{
 	    	jt.setRowSelectionInterval(0, 0);
     	}
     }
-
+//    public void addRowTable2(List<Vector<Object>> list) {
+//    	dt.setRowCount(0);
+//    	Vector<Object> v = new Vector<Object>();
+//    	if(list.size()>0) {
+//	    	for(int i = 0; i <list.size(); i++) {
+//	    		v.add(list.get(i).get(1));
+//	    		v.add(list.get(i).get(2));
+//	    		
+//	    		dt.addRow(v);
+//
+//	    	}
+//	    	
+//	    	jt.setRowSelectionInterval(0, 0);
+//    	}
+//    }
 
 
 	/**
@@ -211,6 +225,15 @@ public class JTableView  extends JFrame implements ActionListener{
 			this.addRowTable(list);
 		}else if(target == bookmark) {//즐겨찾기
 			System.out.println("즐겨찾기");
+			//dto.getid로 id보내고 온 값들 리스트로 받아서 싸아아악 뿌린다.
+			if(dto == null) {
+				FailView.errorMessage("로그인 후 사용해주세요.");
+			}
+			List<Vector<Object>> list = ConvenientFacilitiesController.getFavoriteList(dto.getId());
+			dt.setColumnIdentifiers(nameBookmark);
+			this.addRowTable(list);
+
+			
 		}else if(target == insert) {//회원가입
 			new JDialogView(this, "회원가입");
 		}else if(target == login) {//로그인
@@ -222,6 +245,34 @@ public class JTableView  extends JFrame implements ActionListener{
 			SuccessView.successMessage("로그아웃 되었습니다.");
 		}else if(target == bookmarkBtn) { //즐겨찾기추가
 			System.out.println("즐겨찾기 추가");
+			int row =0;
+			String name = null;
+			String addr = null;
+			
+			if(dto == null) {
+				FailView.errorMessage("로그인 후 사용해주세요.");
+			}
+			
+			if(jt.getColumnName(0).equals("주차장이름")){
+				row = jt.getSelectedRow();
+				name = jt.getValueAt(row, 0).toString();
+				addr = jt.getValueAt(row, 1).toString();
+				ConvenientFacilitiesController.favoriteUpdate(dto.getId(), name, addr);
+				SuccessView.successMessage("즐겨찾기 추가!");
+//				System.out.println(row + " | " + name + " | " + addr);
+			}else if(jt.getColumnName(0).equals("사업장명")) {
+				row = jt.getSelectedRow();
+				name = jt.getValueAt(row, 0).toString();
+				addr = jt.getValueAt(row, 3).toString();
+				ConvenientFacilitiesController.favoriteUpdate(dto.getId(), name, addr);
+				SuccessView.successMessage("즐겨찾기 추가!");
+			}else  {
+				row = jt.getSelectedRow();
+				name = jt.getValueAt(row, 0).toString();
+				addr = jt.getValueAt(row, 6).toString();
+				ConvenientFacilitiesController.favoriteUpdate(dto.getId(), name, addr);
+				SuccessView.successMessage("즐겨찾기 추가!");
+			}
 
 		}
 		
