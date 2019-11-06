@@ -35,7 +35,7 @@ public class UserListDAOImpl implements UserListDAO {
 		Connection con = null;
 		PreparedStatement ps =null;
 		int result =0;
-		String sql = "INSERT INTO USERLIST VALUES ('?','?','?','?')";
+		String sql = "INSERT INTO USERLIST VALUES (?,?,?,?)";
 		 try {
 			 con=DbUtil.getConnection();
 			 ps=con.prepareStatement(sql);
